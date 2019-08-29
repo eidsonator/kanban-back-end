@@ -7,7 +7,7 @@ import java.util.Date;
  * list
  * @author 
  */
-public class KanbanList implements Serializable {
+public class KanbanList {
     private Integer id;
 
     private String title;

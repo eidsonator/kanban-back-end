@@ -1,7 +1,7 @@
 package com.eidsonator.kanban.controller;
 
 import com.eidsonator.kanban.mapper.CardMapper;
-import com.eidsonator.kanban.mapper.ListMapper;
+import com.eidsonator.kanban.mapper.KanbanListMapper;
 import com.eidsonator.kanban.mapper.TaskMapper;
 import com.eidsonator.kanban.model.KanbanList;
 import com.eidsonator.kanban.model.Task;
@@ -23,13 +23,13 @@ public class RestController {
 
     @Autowired
     private TaskMapper taskMapper;
-    private ListMapper listMapper;
+    private KanbanListMapper kanbanListMapper;
     private CardMapper cardMapper;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<KanbanList>> get () {
         HttpHeaders headers = new HttpHeaders();
-        List<KanbanList> all = listMapper.findAll();
+        List<KanbanList> all = kanbanListMapper.findAll();
         for (KanbanList item : all ) {
             item.setCards(cardMapper.findAll(item.getId()));
             item.getCards();

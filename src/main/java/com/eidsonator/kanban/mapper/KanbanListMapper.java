@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface ListMapper {
-    @Select("SELECT id, title, added_timestamp FROM list")
+public interface KanbanListMapper {
+    @Select("SELECT id, title, added_timestamp FROM kanban.list")
     List<KanbanList> findAll();
 
 }
