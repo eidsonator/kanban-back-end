@@ -1,6 +1,9 @@
 package com.eidsonator.kanban.controller;
 
+import com.eidsonator.kanban.mapper.CardMapper;
+import com.eidsonator.kanban.mapper.ListMapper;
 import com.eidsonator.kanban.mapper.TaskMapper;
+import com.eidsonator.kanban.model.KanbanList;
 import com.eidsonator.kanban.model.Task;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +23,18 @@ public class RestController {
 
     @Autowired
     private TaskMapper taskMapper;
+    private ListMapper listMapper;
+    private CardMapper cardMapper;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Task>> get () {
+    public ResponseEntity<List<KanbanList>> get () {
         HttpHeaders headers = new HttpHeaders();
-        List<Task> all = taskMapper.findAll();
-        for (Task item : all ) {
-            item.setChildren(taskMapper.findChildren(item.getId()));
-           item.getChildren();
+        List<KanbanList> all = listMapper.findAll();
+        for (KanbanList item : all ) {
+            item.setCards(cardMapper.findAll(item.getId()));
+            item.getCards();
         }
-        return new ResponseEntity<List<Task>>(all, headers, HttpStatus.OK);
+        return new ResponseEntity<>(all, headers, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
