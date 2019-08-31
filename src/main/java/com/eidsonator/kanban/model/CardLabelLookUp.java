@@ -6,7 +6,7 @@ import java.io.Serializable;
  * card_label
  * @author 
  */
-public class CardLabelKey implements Serializable {
+public class CardLabelLookUp implements Serializable {
     private Integer cardId;
 
     private Integer labelId;
@@ -40,7 +40,7 @@ public class CardLabelKey implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        CardLabelKey other = (CardLabelKey) that;
+        CardLabelLookUp other = (CardLabelLookUp) that;
         return (this.getCardId() == null ? other.getCardId() == null : this.getCardId().equals(other.getCardId()))
             && (this.getLabelId() == null ? other.getLabelId() == null : this.getLabelId().equals(other.getLabelId()));
     }

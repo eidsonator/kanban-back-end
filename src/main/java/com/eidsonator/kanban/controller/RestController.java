@@ -2,7 +2,9 @@ package com.eidsonator.kanban.controller;
 
 import com.eidsonator.kanban.mapper.CardMapper;
 import com.eidsonator.kanban.mapper.KanbanListMapper;
+import com.eidsonator.kanban.mapper.LabelMapper;
 import com.eidsonator.kanban.mapper.TaskMapper;
+import com.eidsonator.kanban.model.Card;
 import com.eidsonator.kanban.model.KanbanList;
 import com.eidsonator.kanban.model.Task;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,8 +25,12 @@ public class RestController {
 
     @Autowired
     private TaskMapper taskMapper;
+    @Autowired
     private KanbanListMapper kanbanListMapper;
+    @Autowired
     private CardMapper cardMapper;
+    @Autowired
+    private LabelMapper labelMapper;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<KanbanList>> get () {
@@ -32,7 +38,10 @@ public class RestController {
         List<KanbanList> all = kanbanListMapper.findAll();
         for (KanbanList item : all ) {
             item.setCards(cardMapper.findAll(item.getId()));
-            item.getCards();
+            for (Card card: item.getCards()) {
+                card.setLabels(labelMapper.findForCard(card.getId()));
+            }
+
         }
         return new ResponseEntity<>(all, headers, HttpStatus.OK);
     }

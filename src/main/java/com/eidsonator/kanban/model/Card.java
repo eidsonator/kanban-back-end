@@ -2,6 +2,7 @@ package com.eidsonator.kanban.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * card
@@ -17,6 +18,8 @@ public class Card implements Serializable {
     private String description;
 
     private Date addedTimestamp;
+
+    private List<Labels> labels;
 
     private static final long serialVersionUID = 1L;
 
@@ -58,6 +61,14 @@ public class Card implements Serializable {
 
     public void setAddedTimestamp(Date addedTimestamp) {
         this.addedTimestamp = addedTimestamp;
+    }
+
+    public List<Labels> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Labels> labels) {
+        this.labels = labels;
     }
 
     @Override
